@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Bjj+Chz6LtAzV6yKcMNMC0gwZzcAEMeIohZsKOCyRJVqycVGuw65Jp8hBpnQNNHdjDGCl6gNY4n8omynqY+fYQ==",
+  "dgSpecHash": "LOE2cl6x14F67tRfnSNY/3VnCScWxi0PXc+blDItUsCTKExVav7vXxoxRMa3Onb/ME164VsPR4boDI3p7BMRrQ==",
   "success": true,
-  "projectFilePath": "E:\\projectMVC\\UniversityHousing\\UniversityHousing\\UniversityHousing.csproj",
+  "projectFilePath": "E:\\projectH\\UniversityHousing\\UniversityHousing\\UniversityHousing.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ABDAL\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ABDAL\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

@@ -2018,11 +2018,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\projectMVC\\UniversityHousing\\UniversityHousing\\UniversityHousing.csproj",
+      "projectUniqueName": "E:\\projectH\\UniversityHousing\\UniversityHousing\\UniversityHousing.csproj",
       "projectName": "UniversityHousing",
-      "projectPath": "E:\\projectMVC\\UniversityHousing\\UniversityHousing\\UniversityHousing.csproj",
+      "projectPath": "E:\\projectH\\UniversityHousing\\UniversityHousing\\UniversityHousing.csproj",
       "packagesPath": "C:\\Users\\ABDAL\\.nuget\\packages\\",
-      "outputPath": "E:\\projectMVC\\UniversityHousing\\UniversityHousing\\obj\\",
+      "outputPath": "E:\\projectH\\UniversityHousing\\UniversityHousing\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

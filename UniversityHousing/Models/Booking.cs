@@ -12,13 +12,14 @@ namespace UniversityHousing.Models
         public DateTime StartDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
-        public bool ApprovalStatus { get; set; }
         [ForeignKey("Student")]
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
         [ForeignKey("Room")]
         public int RoomId { get; set; }
         public virtual Room Room { get; set; }
+        public virtual Request Request { get; set; }
+        public virtual Payment Payment { get; set; }
 
     }
 }

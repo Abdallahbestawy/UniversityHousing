@@ -18,6 +18,8 @@ namespace UniversityHousing.Models
 
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Payment> Payments { get; set; }
+        public DbSet<Faculty> Facultys { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
 
 

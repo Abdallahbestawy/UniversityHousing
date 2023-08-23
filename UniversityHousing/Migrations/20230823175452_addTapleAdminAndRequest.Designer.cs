@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniversityHousing.Models;
 
@@ -11,9 +12,10 @@ using UniversityHousing.Models;
 namespace UniversityHousing.Migrations
 {
     [DbContext(typeof(HousingContext))]
-    partial class HousingContextModelSnapshot : ModelSnapshot
+    [Migration("20230823175452_addTapleAdminAndRequest")]
+    partial class addTapleAdminAndRequest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,8 +157,7 @@ namespace UniversityHousing.Migrations
 
                     b.HasKey("PaymentId");
 
-                    b.HasIndex("BookingId")
-                        .IsUnique();
+                    b.HasIndex("BookingId");
 
                     b.ToTable("Payments");
                 });
@@ -300,8 +301,8 @@ namespace UniversityHousing.Migrations
             modelBuilder.Entity("UniversityHousing.Models.Payment", b =>
                 {
                     b.HasOne("UniversityHousing.Models.Booking", "Booking")
-                        .WithOne("Payment")
-                        .HasForeignKey("UniversityHousing.Models.Payment", "BookingId")
+                        .WithMany()
+                        .HasForeignKey("BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -358,9 +359,6 @@ namespace UniversityHousing.Migrations
 
             modelBuilder.Entity("UniversityHousing.Models.Booking", b =>
                 {
-                    b.Navigation("Payment")
-                        .IsRequired();
-
                     b.Navigation("Request")
                         .IsRequired();
                 });

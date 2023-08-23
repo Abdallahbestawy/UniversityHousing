@@ -1,14 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace UniversityHousing.Models
 {
-    public class Student
+    public class Admin
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int StudentId { get; set; }
-        [Required,MaxLength(500)]
+        public int adminId { get; set; }
+        [Required, MaxLength(500)]
         public string FirstName { get; set; }
         [Required, MaxLength(500)]
         public int LastName { get; set; }
@@ -25,19 +26,6 @@ namespace UniversityHousing.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
         public GenderType Gender { get; set; }
-        [Required,MaxLength (150)]
-        public string StudentGrade { get; set; }
-        [ForeignKey("Address")]
-        public int AddressId { get; set; }
-        public virtual Address Address { get; set; }
-        [ForeignKey("Faculty")]
-        public byte facultyId { get; set; }
-        public virtual Faculty Faculty { get; set; }
-        public byte studentLevel { get; set; }
-
-        public virtual List<Booking> Bookings { get; set; }
-
-
-
+        public virtual List<Request> Requests { get; set; }
     }
 }

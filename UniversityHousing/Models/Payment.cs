@@ -10,6 +10,7 @@ namespace UniversityHousing.Models
         public int PaymentId { get; set; }
         [DataType(DataType.Date)]
         public DateTime PaymentDate { get; set; }
+        public double paymentValue { get; set; }
         public string PaymentMethod { get; set; }
         [ForeignKey("Booking")]
         public int BookingId { get; set; }
