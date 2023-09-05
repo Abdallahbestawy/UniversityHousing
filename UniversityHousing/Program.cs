@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using UniversityHousing.Models;
+using UniversityHousing.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<HousingContext>(option => option.UseSqlServer("name=housing"));
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
 
 var app = builder.Build();
 

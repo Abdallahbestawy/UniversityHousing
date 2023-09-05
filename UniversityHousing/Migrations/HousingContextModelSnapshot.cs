@@ -51,36 +51,13 @@ namespace UniversityHousing.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("adminId"), 1L, 1);
 
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("Gender")
+                    b.Property<int>("userId")
                         .HasColumnType("int");
-
-                    b.Property<int>("LastName")
-                        .HasMaxLength(500)
-                        .HasColumnType("int");
-
-                    b.Property<string>("NationalId")
-                        .IsRequired()
-                        .HasMaxLength(14)
-                        .HasColumnType("nvarchar(14)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasMaxLength(11)
-                        .HasColumnType("nvarchar(11)");
 
                     b.HasKey("adminId");
+
+                    b.HasIndex("userId")
+                        .IsUnique();
 
                     b.ToTable("Admins");
                 });
@@ -92,6 +69,9 @@ namespace UniversityHousing.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -105,11 +85,19 @@ namespace UniversityHousing.Migrations
                     b.Property<int>("StudentId")
                         .HasColumnType("int");
 
+                    b.Property<int>("adminId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("requestStatus")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
                     b.HasIndex("StudentId");
+
+                    b.HasIndex("adminId");
 
                     b.ToTable("Bookings");
                 });
@@ -161,36 +149,6 @@ namespace UniversityHousing.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("UniversityHousing.Models.Request", b =>
-                {
-                    b.Property<int>("requestId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("requestId"), 1L, 1);
-
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("BookingId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("requestStatus")
-                        .HasColumnType("int");
-
-                    b.HasKey("requestId");
-
-                    b.HasIndex("AdminId");
-
-                    b.HasIndex("BookingId")
-                        .IsUnique();
-
-                    b.ToTable("Request");
-                });
-
             modelBuilder.Entity("UniversityHousing.Models.Room", b =>
                 {
                     b.Property<int>("RoomId")
@@ -229,6 +187,40 @@ namespace UniversityHousing.Migrations
                     b.Property<int>("AddressId")
                         .HasColumnType("int");
 
+                    b.Property<string>("StudentGrade")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<byte>("facultyId")
+                        .HasColumnType("tinyint");
+
+                    b.Property<byte>("studentLevel")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentId");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("facultyId");
+
+                    b.HasIndex("userId")
+                        .IsUnique();
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("UniversityHousing.Models.User", b =>
+                {
+                    b.Property<int>("userId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"), 1L, 1);
+
                     b.Property<DateTime>("DateOfBirth")
                         .HasColumnType("datetime2");
 
@@ -244,9 +236,10 @@ namespace UniversityHousing.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int>("LastName")
+                    b.Property<string>("LastName")
+                        .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("NationalId")
                         .IsRequired()
@@ -258,24 +251,20 @@ namespace UniversityHousing.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<string>("StudentGrade")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                    b.HasKey("userId");
 
-                    b.Property<byte>("facultyId")
-                        .HasColumnType("tinyint");
+                    b.ToTable("users");
+                });
 
-                    b.Property<byte>("studentLevel")
-                        .HasColumnType("tinyint");
+            modelBuilder.Entity("UniversityHousing.Models.Admin", b =>
+                {
+                    b.HasOne("UniversityHousing.Models.User", "User")
+                        .WithOne("Admin")
+                        .HasForeignKey("UniversityHousing.Models.Admin", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasKey("StudentId");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("facultyId");
-
-                    b.ToTable("Students");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UniversityHousing.Models.Booking", b =>
@@ -292,6 +281,14 @@ namespace UniversityHousing.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("UniversityHousing.Models.Admin", "Admin")
+                        .WithMany("Bookings")
+                        .HasForeignKey("adminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Admin");
+
                     b.Navigation("Room");
 
                     b.Navigation("Student");
@@ -304,25 +301,6 @@ namespace UniversityHousing.Migrations
                         .HasForeignKey("UniversityHousing.Models.Payment", "BookingId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Booking");
-                });
-
-            modelBuilder.Entity("UniversityHousing.Models.Request", b =>
-                {
-                    b.HasOne("UniversityHousing.Models.Admin", "Admin")
-                        .WithMany("Requests")
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UniversityHousing.Models.Booking", "Booking")
-                        .WithOne("Request")
-                        .HasForeignKey("UniversityHousing.Models.Request", "BookingId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Admin");
 
                     b.Navigation("Booking");
                 });
@@ -341,9 +319,17 @@ namespace UniversityHousing.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("UniversityHousing.Models.User", "User")
+                        .WithOne("Student")
+                        .HasForeignKey("UniversityHousing.Models.Student", "userId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Address");
 
                     b.Navigation("Faculty");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UniversityHousing.Models.Address", b =>
@@ -353,15 +339,12 @@ namespace UniversityHousing.Migrations
 
             modelBuilder.Entity("UniversityHousing.Models.Admin", b =>
                 {
-                    b.Navigation("Requests");
+                    b.Navigation("Bookings");
                 });
 
             modelBuilder.Entity("UniversityHousing.Models.Booking", b =>
                 {
                     b.Navigation("Payment")
-                        .IsRequired();
-
-                    b.Navigation("Request")
                         .IsRequired();
                 });
 
@@ -378,6 +361,15 @@ namespace UniversityHousing.Migrations
             modelBuilder.Entity("UniversityHousing.Models.Student", b =>
                 {
                     b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("UniversityHousing.Models.User", b =>
+                {
+                    b.Navigation("Admin")
+                        .IsRequired();
+
+                    b.Navigation("Student")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

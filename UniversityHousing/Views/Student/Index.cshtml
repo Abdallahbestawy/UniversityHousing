@@ -1,0 +1,40 @@
+﻿
+@model List<StudentListViewModel>
+
+<h1>Student List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>National ID</th>
+            <th>Email</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Student Grade</th>
+            <th>Address</th>
+            <th>Faculty Name</th>
+            <th>Student Level</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Phone</td>
+                <td>@student.NationalId</td>
+                <td>@student.Email</td>
+                <td>@student.DateOfBirth.ToShortDateString()</td>
+                <td>@student.Gender</td>
+                <td>@student.StudentGrade</td>
+                <td>@student.Address</td>
+                <td>@student.facultyName</td>
+                <td>@student.studentLevel</td>
+            </tr>
+        }
+    </tbody>
+</table>

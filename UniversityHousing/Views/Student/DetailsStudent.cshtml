@@ -1,0 +1,121 @@
+﻿@model StudentListViewModel
+
+<h1>Student Details</h1>
+
+<div class="student-details">
+    <div class="row">
+        <div class="col-md-3">
+            <strong>First Name:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.FirstName
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Last Name:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.LastName
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Phone:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.Phone
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>National ID:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.NationalId
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Email:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.Email
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Date of Birth:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.DateOfBirth.ToShortDateString()
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Gender:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.Gender
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Student Grade:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.StudentGrade
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Address:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.Address
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Faculty Name:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.facultyName
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <strong>Student Level:</strong>
+        </div>
+        <div class="col-md-9">
+            @Model.studentLevel
+        </div>
+    </div>
+</div>
+
+<style>
+    .student-details {
+        padding: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+        .student-details .row {
+            margin-bottom: 10px;
+        }
+
+        .student-details strong {
+            font-weight: bold;
+        }
+</style>
