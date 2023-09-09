@@ -7,6 +7,6 @@ namespace UniversityHousing.Service
         List<Faculty> GettAllFaculty();
         int CreateFaculty(Faculty faculty);
         int UpdateFaculty(int factId,Faculty faculty);
-         int DeleteFaculty(int factId);
+        int DeleteFaculty(int factId);
     }
 }
